@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,7 +28,7 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>jobs_noti</title>
   <link rel="manifest" href="manifest.json">
@@ -39,20 +40,35 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
+
 <body>
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         }
-      }).then(function(engineInitializer) {
+      }).then(function (engineInitializer) {
         return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
+      }).then(function (appRunner) {
         return appRunner.runApp();
       });
     });
+    const firebaseConfig = {
+      apiKey: "AIzaSyDlQ4czHYLID5v3VqpuAH-v-2CSRmzDf10",
+      authDomain: "jobs-noti-student.firebaseapp.com",
+      projectId: "jobs-noti-student",
+      storageBucket: "jobs-noti-student.appspot.com",
+      messagingSenderId: "318132939256",
+      appId: "1:318132939256:web:480d73c5bc2389f9504e0d",
+      measurementId: "G-Z7VTTSHP0Q"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
   </script>
 </body>
+
 </html>
