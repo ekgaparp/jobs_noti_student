@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:jobs_noti/defaulplatform.dart';
 import 'package:jobs_noti/home_screen.dart';
+import 'package:jobs_noti/login/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Bloc.observer = AppBlocObserver();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      // name: 'jobs_noti', options: DefaultFirebaseConfig.platformOptions);
+      );
   runApp(const MyApp());
 }
 
@@ -20,6 +23,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const HomeScreenPage());
+        home: LoginAllScreen());
   }
 }

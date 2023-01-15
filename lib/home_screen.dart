@@ -176,7 +176,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                 print('object :${_dataModel.subjectName}');
                                 await _firbase
                                     .collection('DataJobsDetail')
-                                    .doc('200')
+                                    .doc()
                                     .set({
                                   'subjectId': _dataModel.subjectId,
                                   'subjectName': _dataModel.subjectName,
