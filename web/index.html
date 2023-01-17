@@ -55,7 +55,10 @@
         return appRunner.runApp();
       });
     });
-    const firebaseConfig = {
+    // import { initializeApp } from "firebase/app";
+    // import { getAuth } from "firebase/auth";
+
+    var firebaseConfig = {
       apiKey: "AIzaSyDlQ4czHYLID5v3VqpuAH-v-2CSRmzDf10",
       authDomain: "jobs-noti-student.firebaseapp.com",
       projectId: "jobs-noti-student",
@@ -66,8 +69,9 @@
     };
 
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    // export const app = initializeApp(firebaseConfig);
+    // export const auth = getAuth(app);
+    firebase.initializeApp(firebaseConfig);
   </script>
 </body>
 

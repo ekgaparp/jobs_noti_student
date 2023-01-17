@@ -106,29 +106,27 @@ class _LoginAllScreenState extends State<LoginAllScreen> {
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
-        child: Container(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTextWelcome(),
-                const SizedBox(height: 10),
-                _buildLoginDescriptionText(),
-                const SizedBox(height: 50),
-                _buildTextFieldEmail(),
-                const SizedBox(height: 25),
-                _buildTextFieldPassword(),
-                const SizedBox(height: 50),
-                _buildEmailAndPasswordLoginButton(),
-                const SizedBox(height: 20),
-                _buildRegisterButton(),
-                const SizedBox(height: 20),
-                // _buildTextOr(),
-                const SizedBox(height: 30),
-                // _buildGoogleAndFacebookButton(),
-              ],
-            ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildTextWelcome(),
+              const SizedBox(height: 10),
+              _buildLoginDescriptionText(),
+              const SizedBox(height: 50),
+              _buildTextFieldEmail(),
+              const SizedBox(height: 25),
+              _buildTextFieldPassword(),
+              const SizedBox(height: 50),
+              _buildEmailAndPasswordLoginButton(),
+              const SizedBox(height: 20),
+              _buildRegisterButton(),
+              const SizedBox(height: 20),
+              // _buildTextOr(),
+              const SizedBox(height: 30),
+              // _buildGoogleAndFacebookButton(),
+            ],
           ),
         ),
       ),
@@ -202,9 +200,9 @@ class _LoginAllScreenState extends State<LoginAllScreen> {
       child: ElevatedButton(
           child: const Text("เข้าสู่ระบบ", style: TextStyle(fontSize: 25)),
           style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 1, 155, 52),
+              backgroundColor: Color.fromARGB(255, 255, 0, 251),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14))),
+                  borderRadius: BorderRadius.circular(0))),
           onPressed: () async {
             await signInWithEmailAndPassword();
             // await _GetroleUser(context);
