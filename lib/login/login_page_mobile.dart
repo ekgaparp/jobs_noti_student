@@ -198,15 +198,15 @@ class _LoginAllScreenState extends State<LoginAllScreen> {
       height: 60,
       width: double.infinity,
       child: ElevatedButton(
-          child: const Text("เข้าสู่ระบบ", style: TextStyle(fontSize: 25)),
           style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 255, 0, 251),
+              backgroundColor: const Color.fromARGB(255, 255, 0, 251),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(0))),
           onPressed: () async {
             await signInWithEmailAndPassword();
             // await _GetroleUser(context);
-          }),
+          },
+          child: const Text("เข้าสู่ระบบ", style: TextStyle(fontSize: 25))),
     );
   }
 
@@ -220,8 +220,10 @@ class _LoginAllScreenState extends State<LoginAllScreen> {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => FromRegisterAllUser()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FromRegisterAllUser()));
           },
           child: const Text(
             "  สร้างบัญชีใหม่",

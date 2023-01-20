@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, prefer_final_fields
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -9,7 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:jobs_noti/Service/overlay.dart';
-import 'package:jobs_noti/login/login_page.dart';
+import 'package:jobs_noti/login/login_page_mobile.dart';
+import 'package:jobs_noti/login/login_page_web.dart';
 import 'package:jobs_noti/model/profile_all_user.dart';
 
 class FromRegisterAllUser extends StatefulWidget {
@@ -24,7 +25,20 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
   final Future<FirebaseApp> _firebase = Firebase.initializeApp();
   bool _isObscure = true;
   bool _isObscure2 = true;
-  final Profile _profile = Profile("", "", "", "", "", "", "", "", "", "");
+  String uid = '';
+  String email = '';
+  String password = '';
+  String comfirmpassword = '';
+  String roleUser = '';
+  String fname = '';
+  String lastname = '';
+  String skill = '';
+  String gender = '';
+  String call = '';
+  // Profile _profile = Profile(uid, email, password, comfirmpassword, roleUser,
+  //     fname, lname, skill, gender, call);
+  Profile _profile = Profile('email', 'password', 'roleUser', 'comfirmpassword',
+      'uid', 'call', 'fname', 'lname', 'gender', 'skill');
   var _confirmPass;
 
   Future<void> showAlert() async {
@@ -52,7 +66,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
                   onPressed: () {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return const LoginAllScreen();
+                      return const LoginScreenWep();
                     }));
                   },
                 ),
@@ -67,10 +81,10 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
       final loadingOverlay = LoadingOverlay.of(context);
       try {
         loadingOverlay.show();
-        // final userCredential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: _profile.email, password: _profile.password);
-        // await userCredential.user.sendEmailVerification();
+        final userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: _profile.email, password: _profile.password);
+        await userCredential.user!.sendEmailVerification();
         var firebaseUser = FirebaseAuth.instance.currentUser;
 
         await FirebaseFirestore.instance
@@ -125,7 +139,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
     }
   }
 
-  List itemList = ["ผู้ให้คำปรึกษา", "นักศึกษา", "ผู้ดูเเลระบบ"];
+  List itemList = ["ควาย", "หญ๋า", "คนเลี้ยง"];
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +224,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
       decoration: InputDecoration(
         hintText: "อีเมล",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(0),
           borderSide: const BorderSide(width: 0),
         ),
       ),
@@ -230,7 +244,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
       decoration: InputDecoration(
           hintText: "รหัสผ่าน",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(0),
             borderSide: const BorderSide(width: 0),
           ),
           suffixIcon: IconButton(
@@ -266,7 +280,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
       decoration: InputDecoration(
           hintText: "ยืนยันรหัสผ่าน",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(0),
             borderSide: const BorderSide(width: 0),
           ),
           suffixIcon: IconButton(
@@ -307,7 +321,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
         contentPadding: EdgeInsets.zero,
         border: OutlineInputBorder(
           // borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(13),
+          borderRadius: BorderRadius.circular(0),
         ),
       ),
       icon: const Icon(
@@ -319,7 +333,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
       buttonPadding: const EdgeInsets.all(10),
       dropdownDecoration: BoxDecoration(
         border: const Border(),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(0),
       ),
       items: itemList
           .map((item) => DropdownMenuItem(value: item, child: Text(item)))
@@ -339,12 +353,13 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
         height: 60,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 1, 155, 52),
+                backgroundColor: const Color.fromARGB(255, 255, 0, 251),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14))),
+                    borderRadius: BorderRadius.circular(0))),
             onPressed: () async {
-              print('model : ${_profile.email} ${_profile.password}');
-              // await createUserWithEmailAndPassword();
+              await createUserWithEmailAndPassword();
+              print(
+                  'model : ${_profile.email.toString()} ${_profile.password.toString()}');
             },
             child: const Text("สร้างบัญชี", style: TextStyle(fontSize: 20))));
   }
