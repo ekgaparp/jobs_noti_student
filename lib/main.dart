@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jobs_noti/defaulplatform.dart';
-import 'package:jobs_noti/login/login_page_mobile.dart';
 import 'package:jobs_noti/login/login_page_web.dart';
 
 void main() async {

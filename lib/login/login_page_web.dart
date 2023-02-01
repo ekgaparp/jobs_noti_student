@@ -1,7 +1,4 @@
 // ignore_for_file: avoid_unnecessary_containers
-
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,7 +16,8 @@ class LoginScreenWep extends StatefulWidget {
 
 class _LoginScreenWepState extends State<LoginScreenWep> {
   final _formKey = GlobalKey<FormState>();
-  final Profile _profile = Profile("", "", "", "", "", "", "", "", "", "");
+  final emailregister = TextEditingController();
+  final passwordRegister = TextEditingController();
 
   bool _isObscure = true;
   Future<void> signInWithEmailAndPassword() async {
@@ -29,9 +27,9 @@ class _LoginScreenWepState extends State<LoginScreenWep> {
     try {
       loadingOverlay.show();
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _profile.email, password: _profile.password);
+          email: emailregister.toString(),
+          password: passwordRegister.toString());
       // _sharedPreferencescollectEmail(_profile.email);
-
       // final _userCurrent = FirebaseAuth.instance.currentUser;
       // print('_userCurrent :$_userCurrent');
     } on FirebaseAuthException catch (e) {
@@ -108,6 +106,7 @@ class _LoginScreenWepState extends State<LoginScreenWep> {
 
   Widget _buildTextFieldEmail() {
     return TextFormField(
+      controller: emailregister,
       decoration: InputDecoration(
         hintText: "อีเมล",
         border: OutlineInputBorder(
@@ -120,14 +119,15 @@ class _LoginScreenWepState extends State<LoginScreenWep> {
         EmailValidator(errorText: "Invalid Email format")
       ]),
       keyboardType: TextInputType.emailAddress,
-      onChanged: (String email) {
-        _profile.email = email;
-      },
+      // onChanged: (String email) {
+      //   _profile.email = email;
+      // },
     );
   }
 
   Widget _buildTextFieldPassword() {
     return TextFormField(
+      controller: passwordRegister,
       decoration: InputDecoration(
           hintText: "รหัสผ่าน",
           border: OutlineInputBorder(
@@ -146,9 +146,9 @@ class _LoginScreenWepState extends State<LoginScreenWep> {
           )),
       validator: RequiredValidator(errorText: "Please Enter Password"),
       obscureText: _isObscure,
-      onChanged: (String password) {
-        _profile.password = password;
-      },
+      // onChanged: (String password) {
+      //   _profile.password = password;
+      // },
     );
   }
 
