@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_final_fields
+// ignore_for_file: library_private_types_in_public_api, prefer_final_fields, prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -9,9 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:jobs_noti/Service/overlay.dart';
-import 'package:jobs_noti/login/login_page_mobile.dart';
 import 'package:jobs_noti/login/login_page_web.dart';
-import 'package:jobs_noti/model/profile_all_user.dart';
 
 class FromRegisterAllUser extends StatefulWidget {
   const FromRegisterAllUser({super.key});
@@ -25,21 +23,12 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
   final Future<FirebaseApp> _firebase = Firebase.initializeApp();
   bool _isObscure = true;
   bool _isObscure2 = true;
-  String uid = '';
-  String email = '';
-  String password = '';
-  String comfirmpassword = '';
-  String roleUser = '';
-  String fname = '';
-  String lastname = '';
-  String skill = '';
-  String gender = '';
-  String call = '';
-  // Profile _profile = Profile(uid, email, password, comfirmpassword, roleUser,
-  //     fname, lname, skill, gender, call);
-  Profile _profile = Profile('email', 'password', 'roleUser', 'comfirmpassword',
-      'uid', 'call', 'fname', 'lname', 'gender', 'skill');
-  var _confirmPass;
+
+  var confirmPass;
+  final emailregister = TextEditingController();
+  final passwordRegister = TextEditingController();
+  final passwordConRegiter = TextEditingController();
+  final roleUserRegister = TextEditingController();
 
   Future<void> showAlert() async {
     showDialog(
@@ -81,10 +70,11 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
       final loadingOverlay = LoadingOverlay.of(context);
       try {
         loadingOverlay.show();
-        final userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-                email: _profile.email, password: _profile.password);
-        await userCredential.user!.sendEmailVerification();
+        // final userCredential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailregister.toString(),
+            password: passwordRegister.toString());
+        // await userCredential.user!.sendEmailVerification();
         var firebaseUser = FirebaseAuth.instance.currentUser;
 
         await FirebaseFirestore.instance
@@ -94,10 +84,10 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
           // "name": _profile.fname,
           // "lastname": _profile.lname,
           "UID": firebaseUser.uid,
-          "email": _profile.email,
-          "password": _profile.password,
-          "comfirmpassword": _profile.comfirmpassword,
-          "role": _profile.roleUser,
+          "email": emailregister,
+          "password": passwordRegister,
+          "comfirmpassword": passwordConRegiter,
+          // "role": _profile.roleUser,
           "status": 'not complete'
         });
       } on FirebaseAuthException catch (e) {
@@ -201,8 +191,8 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
                         const SizedBox(height: 15),
                         _buildTextfieldConfrimPassWord(),
                         const SizedBox(height: 15),
-                        _buildRoleOfUser(),
-                        const SizedBox(height: 40),
+                        // _buildRoleOfUser(),
+                        // const SizedBox(height: 40),
                         _buildCreeateButton()
                       ],
                     ),
@@ -221,6 +211,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
 
   Widget _buildTextfieldEmail() {
     return TextFormField(
+      controller: emailregister,
       decoration: InputDecoration(
         hintText: "อีเมล",
         border: OutlineInputBorder(
@@ -233,14 +224,15 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
         EmailValidator(errorText: "Invalid Email format")
       ]),
       keyboardType: TextInputType.emailAddress,
-      onSaved: (email) {
-        _profile.email = email.toString();
-      },
+      // onSaved: (email) {
+      //   _profile.email = email.toString();
+      // },
     );
   }
 
   Widget _buildTextfiedPassword() {
     return TextFormField(
+      controller: passwordRegister,
       decoration: InputDecoration(
           hintText: "รหัสผ่าน",
           border: OutlineInputBorder(
@@ -259,7 +251,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
           )),
       obscureText: _isObscure,
       validator: (value) {
-        _confirmPass = value;
+        confirmPass = value;
         RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
         if (value!.isEmpty) {
           return "Please Enter New Password";
@@ -269,14 +261,15 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
           return null;
         }
       },
-      onSaved: (password) {
-        _profile.password = password!;
-      },
+      // onSaved: (password) {
+      //   _profile.password = password!;
+      // },
     );
   }
 
   Widget _buildTextfieldConfrimPassWord() {
     return TextFormField(
+      controller: passwordConRegiter,
       decoration: InputDecoration(
           hintText: "ยืนยันรหัสผ่าน",
           border: OutlineInputBorder(
@@ -300,15 +293,15 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
           return "Please Re-Enter Password";
         } else if (value.length < 9) {
           return "Password must be atleast 9 characters long";
-        } else if (value != _confirmPass) {
+        } else if (value != confirmPass) {
           return "Password must be same as above";
         } else {
           return null;
         }
       },
-      onSaved: (comfirmpassword) {
-        _profile.comfirmpassword = comfirmpassword!;
-      },
+      // onSaved: (comfirmpassword) {
+      //   _profile.comfirmpassword = comfirmpassword!;
+      // },
     );
   }
 
@@ -341,9 +334,9 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
       onChanged: (value) {
         setState(() {});
       },
-      onSaved: (role) {
-        _profile.roleUser = role.toString();
-      },
+      // onSaved: (role) {
+      //   _profile.roleUser = role.toString();
+      // },
     );
   }
 
@@ -359,7 +352,7 @@ class _FromRegisterAllUserState extends State<FromRegisterAllUser> {
             onPressed: () async {
               await createUserWithEmailAndPassword();
               print(
-                  'model : ${_profile.email.toString()} ${_profile.password.toString()}');
+                  'model : ${emailregister.toString()} ${passwordRegister.toString()}');
             },
             child: const Text("สร้างบัญชี", style: TextStyle(fontSize: 20))));
   }

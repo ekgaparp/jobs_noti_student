@@ -7,28 +7,28 @@ class DefaultFirebaseConfig {
       //Web
       Firebase.initializeApp(
           options: const FirebaseOptions(
-              apiKey: "AIzaSyDlQ4czHYLID5v3VqpuAH-v-2CSRmzDf10",
-              authDomain: "jobs-noti-student.firebaseapp.com",
-              projectId: "jobs-noti-student",
-              storageBucket: "jobs-noti-student.appspot.com",
-              messagingSenderId: "318132939256",
-              appId: "1:318132939256:web:480d73c5bc2389f9504e0d",
-              measurementId: "G-Z7VTTSHP0Q"));
+              apiKey: "AIzaSyAWCM-dyNkbsUk606QNyIzzmDn2S7ubsdw",
+              authDomain: "jobs-noti-student-fd538.firebaseapp.com",
+              projectId: "jobs-noti-student-fd538",
+              storageBucket: "jobs-noti-student-fd538.appspot.com",
+              messagingSenderId: "659999669595",
+              appId: "1:659999669595:web:44e378e777a2b77f1aae7e",
+              measurementId: "G-WN7ZDH1QF9"));
       return const FirebaseOptions(
-          apiKey: "AIzaSyDlQ4czHYLID5v3VqpuAH-v-2CSRmzDf10",
-          authDomain: "jobs-noti-student.firebaseapp.com",
-          projectId: "jobs-noti-student",
-          storageBucket: "jobs-noti-student.appspot.com",
-          messagingSenderId: "318132939256",
-          appId: "1:318132939256:web:480d73c5bc2389f9504e0d",
-          measurementId: "G-Z7VTTSHP0Q");
+          apiKey: "AIzaSyAWCM-dyNkbsUk606QNyIzzmDn2S7ubsdw",
+          authDomain: "jobs-noti-student-fd538.firebaseapp.com",
+          projectId: "jobs-noti-student-fd538",
+          storageBucket: "jobs-noti-student-fd538.appspot.com",
+          messagingSenderId: "659999669595",
+          appId: "1:659999669595:web:44e378e777a2b77f1aae7e",
+          measurementId: "G-WN7ZDH1QF9");
     } else {
       //Android
       return const FirebaseOptions(
-        apiKey: "AIzaSyDlQ4czHYLID5v3VqpuAH",
-        projectId: "jobs-noti-student",
-        messagingSenderId: "318132939256",
-        appId: "1:318132939256:android:448eca0e8ab54937504e0d",
+        apiKey: "AIzaSyAWCM-dyNkbsUk606QNyIzzmDn2S7ubsdw",
+        projectId: "jobs-noti-student-fd538",
+        messagingSenderId: "659999669595",
+        appId: "1:659999669595:android:d79308ef1fd5cd4d1aae7e",
       );
     }
   }
